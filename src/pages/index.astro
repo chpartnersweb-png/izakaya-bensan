@@ -1,8 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import Header from '../components/Header.astro';
+import Seo from '../components/Seo.astro';
 import Icon from '../components/Icon.astro';
-import { shop, mapUrl, mapEmbedUrl, foodGroups, drinks, whiskyNames, navigation, description, restaurantSchema } from '../data/bensan';
+import { shop, mapUrl, mapEmbedUrl, foodGroups, drinks, whiskyNames, navigation } from '../data/bensan';
 import hero from '../assets/bensan-hero.png';
 import staff from '../assets/staff-upright.jpg';
 import exterior from '../assets/店前.jpg';
@@ -19,7 +20,6 @@ import foodPdf from '../assets/メニュー１.pdf?url';
 import drinkPdf from '../assets/ドリンク１.pdf?url';
 import '../styles/global.css';
 
-const title = '居酒屋ベンさん｜町田のフィリピン屋台料理・土日食べ放題';
 const scenes = [
   { number: '01', en: 'COUNTER & TABLE', title: 'ひとりでも、みんなでも。', label: '1F 店内', seats: '13席', image: counter, alt: '居酒屋ベンさん1階のカウンターとテーブル席', text: '仕事帰りの一杯も、友だちとのごはんも。カウンターのある1階で、いつもの居酒屋時間を。' },
   { number: '02', en: 'GARDEN & BBQ', title: '外の空気と、乾杯。', label: 'ガーデン', seats: '10席', image: garden, alt: '緑に囲まれたガーデンの屋外テーブル席', text: '庭でのお食事やバーベキューも楽しめます。BBQのご利用については、お電話でご相談ください。' },
@@ -31,16 +31,7 @@ const scenes = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#103657" />
-    <meta name="description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ja_JP" />
-    <meta property="og:site_name" content={shop.name} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/bensan-icon.svg" />
-    <title>{title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify(restaurantSchema).replace(/</g, '\\u003c')} />
+    <Seo />
   </head>
   <body id="top">
     <Header />

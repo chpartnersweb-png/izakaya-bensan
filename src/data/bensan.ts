@@ -44,9 +44,9 @@ export const drinks: MenuItem[] = [
   { name: 'ソフトドリンク', price: '400', note: 'コーラ・オレンジジュース・ウーロン茶ほか' },
 ];
 export const whiskyNames = ['山崎NV', '白州NV', '響JH', '響BC', '山崎12年', 'Ballantine’s 30年'];
-export const description = 'JR町田駅ターミナル改札口から徒歩2分。居酒屋ベンさんは、フィリピン屋台料理と居酒屋メニューを楽しめるお店。土日は12時から食べ放題、毎日19時までハッピーアワー。ガーデンでのお食事やBBQ、2階カラオケルームも。';
+export const description = '町田でフィリピン料理を楽しむなら居酒屋ベンさん。JR町田駅ターミナル改札口から徒歩2分。土日は12時からフィリピン料理食べ放題、毎日19時までハッピーアワー。居酒屋メニュー、ガーデンBBQ、2階カラオケルームも。水曜定休。';
 export const restaurantSchema = {
-  '@context': 'https://schema.org', '@type': 'Restaurant', name: shop.name, description, telephone: shop.telephone,
+  '@type': 'Restaurant', name: shop.name, description, telephone: shop.telephone,
   address: { '@type': 'PostalAddress', postalCode: shop.postalCode, streetAddress: `原町田4-1-5 ${shop.building}`, addressLocality: '町田市', addressRegion: '東京都', addressCountry: 'JP' },
   servesCuisine: ['フィリピン料理', '居酒屋料理'], hasMap: mapUrl,
   openingHoursSpecification: [
