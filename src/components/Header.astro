@@ -1,0 +1,17 @@
+---
+import { navigation, shop } from '../data/bensan';
+import Icon from './Icon.astro';
+---
+<a class="skip-link" href="#main">本文へスキップ</a>
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="居酒屋ベンさん トップへ"><span class="brand__sun"><Icon name="sun" /></span><span><small>フィリピン屋台料理と、乾杯。</small><span class="brand__name"><span>居酒屋</span>ベンさん<span class="brand__dot">●</span></span></span></a>
+  <nav class="desktop-nav" aria-label="メインナビゲーション">{navigation.filter((item) => item.href !== '#buffet').map((item) => <a href={item.href}>{item.label}</a>)}</nav>
+  <a class="header-phone" href={shop.telephoneHref}><Icon name="phone" /><span>ご予約・お問い合わせ<small>{shop.telephone}</small></span></a>
+  <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><small>MENU</small></button>
+</header>
+<dialog class="mobile-menu" id="mobile-menu" aria-labelledby="mobile-menu-title">
+  <div class="mobile-menu__top"><span id="mobile-menu-title">BEN-SAN MENU</span><button type="button" class="menu-close" aria-label="メニューを閉じる">×</button></div>
+  <nav aria-label="モバイルナビゲーション">{navigation.map((item) => <a href={item.href}><span><small>{item.en}</small>{item.label}</span><Icon name="arrow" /></a>)}</nav>
+  <a class="button button--yellow mobile-menu__phone" href={shop.telephoneHref}><Icon name="phone" />{shop.telephone}</a>
+  <p>平日 17:00–23:00 ／ 土日祝 12:00–23:00<br />水曜定休</p>
+</dialog>

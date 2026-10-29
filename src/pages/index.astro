@@ -1,16 +1,177 @@
 ---
----
+import { Image } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Icon from '../components/Icon.astro';
+import { shop, mapUrl, mapEmbedUrl, foodGroups, drinks, whiskyNames, navigation, description, restaurantSchema } from '../data/bensan';
+import hero from '../assets/bensan-hero.png';
+import staff from '../assets/staff-upright.jpg';
+import exterior from '../assets/店前.jpg';
+import counter from '../assets/店内1.jpg';
+import karaoke from '../assets/店内2.jpg';
+import garden from '../assets/ガーデン.jpg';
+import food1 from '../assets/料理1.jpg';
+import food2 from '../assets/料理２.jpg';
+import food3 from '../assets/料理3.jpg';
+import food4 from '../assets/料理４.jpg';
+import food5 from '../assets/料理5.jpg';
+import bottles from '../assets/unnamed.webp';
+import foodPdf from '../assets/メニュー１.pdf?url';
+import drinkPdf from '../assets/ドリンク１.pdf?url';
+import '../styles/global.css';
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+const title = '居酒屋ベンさん｜町田のフィリピン屋台料理・土日食べ放題';
+const scenes = [
+  { number: '01', en: 'COUNTER & TABLE', title: 'ひとりでも、みんなでも。', label: '1F 店内', seats: '13席', image: counter, alt: '居酒屋ベンさん1階のカウンターとテーブル席', text: '仕事帰りの一杯も、友だちとのごはんも。カウンターのある1階で、いつもの居酒屋時間を。' },
+  { number: '02', en: 'GARDEN & BBQ', title: '外の空気と、乾杯。', label: 'ガーデン', seats: '10席', image: garden, alt: '緑に囲まれたガーデンの屋外テーブル席', text: '庭でのお食事やバーベキューも楽しめます。BBQのご利用については、お電話でご相談ください。' },
+  { number: '03', en: 'KARAOKE ROOM', title: '食べて、飲んで、歌って。', label: '2F カラオケルーム', seats: '15席', image: karaoke, alt: '居酒屋ベンさん2階のソファとカラオケ設備のあるお部屋', text: '宴会や仲間との集まりには、2階のカラオケルームへ。お食事の時間を、もっと賑やかに。' },
+];
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#103657" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:site_name" content={shop.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/bensan-icon.svg" />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(restaurantSchema).replace(/</g, '\\u003c')} />
+  </head>
+  <body id="top">
+    <Header />
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <Image class="hero__image" src={hero} alt="串焼きとビールを囲むフィリピンの街角をイメージしたイラスト" widths={[640, 960, 1440, 1920]} sizes="100vw" width={1920} loading="eager" fetchpriority="high" format="webp" quality={88} />
+        <div class="hero__shade" aria-hidden="true"></div>
+        <div class="hero__content wrap">
+          <p class="eyebrow hero__eyebrow"><span></span> MACHIDA × PHILIPPINES</p>
+          <h1 id="hero-title">町田で、<br /><span>フィリピン気分。</span></h1>
+          <p class="hero__lead">今夜もベンさんで乾杯。</p>
+          <p class="hero__description">フィリピン屋台料理と、<br class="mobile-only" />いつもの居酒屋ごはん。<br />ひとりの一杯も、みんなの宴会も。</p>
+          <div class="hero__actions">
+            <a class="button button--yellow" href="#menu">メニューを見る<Icon name="arrow" /></a>
+            <a class="hero__call" href={shop.telephoneHref}><Icon name="phone" /><span>ご予約・お問い合わせ<small>{shop.telephone}</small></span></a>
+          </div>
+          <p class="hero__station"><Icon name="pin" />{shop.access}</p>
+        </div>
+        <span class="hero__caption">イメージイラスト</span>
+        <a class="hero__scroll" href="#about"><span>SCROLL TO BEN-SAN</span><span aria-hidden="true">↓</span></a>
+      </section>
+
+      <div class="quick-info">
+        <div class="wrap quick-info__inner"><p><span>OPEN</span>平日 17:00–23:00 <i>／</i> 土日祝 12:00–23:00</p><p>水曜定休</p><a href="#access">お店への行き方<Icon name="arrow" /></a></div>
+      </div>
+
+      <section class="about section wrap" id="about" aria-labelledby="about-title">
+        <div class="about__text reveal">
+          <p class="eyebrow"><Icon name="sun" /> HELLO, BEN-SAN!</p>
+          <h2 id="about-title">いつもの町田で、<br />ちょっと違う<span class="ink-red">おいしさ</span>を。</h2>
+          <p>フィリピンの屋台料理も、なじみのある居酒屋料理も。<br class="desktop-only" />今日はどっちも、ベンさんで。</p>
+          <p>ひとりでふらっと。友だちや家族とわいわい。<br class="desktop-only" />料理を囲んで、おしゃべりして、もう一杯。<br class="desktop-only" />そんな時間を、ここ町田で楽しみませんか。</p>
+          <a class="text-link" href="#space">ベンさんでの過ごし方<Icon name="arrow" /></a>
+        </div>
+        <div class="about__photos reveal">
+          <figure class="about__staff"><Image src={staff} alt="店内で迎える居酒屋ベンさんのスタッフ" width={480} format="webp" loading="lazy" /><figcaption>ベンさんへ、ようこそ！</figcaption></figure>
+          <figure class="about__exterior"><Image src={exterior} alt="フィリピン国旗が目印の居酒屋ベンさんの店先" width={440} format="webp" loading="lazy" /><figcaption>町田駅から、歩いて2分。</figcaption></figure>
+          <span class="about__stamp" aria-hidden="true">EAT.<br />DRINK.<br />SMILE.</span>
+        </div>
+      </section>
+
+      <section class="buffet" id="buffet" aria-labelledby="buffet-title">
+        <div class="bunting" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="wrap buffet__inner">
+          <div class="buffet__copy reveal">
+            <p class="eyebrow">WEEKEND, FILIPINO STYLE.</p>
+            <p class="buffet__day">土・日 <span>12:00から</span></p>
+            <h2 id="buffet-title">お昼から、<br />フィリピン料理<br /><span>食べ放題！</span></h2>
+            <p class="buffet__intro">週末は、いろんなおいしさを少しずつ。<br />日替わりのフィリピン料理を楽しもう。</p>
+            <p class="buffet__price"><span>お一人様</span><strong>2,000</strong><span>円</span></p>
+            <p class="small-note">写真は料理の一例です。内容は日替わりとなります。<br />料金・ご利用条件の詳細は、店舗へお問い合わせください。</p>
+            <a class="button button--navy" href={shop.telephoneHref}><Icon name="phone" />食べ放題について問い合わせる<Icon name="arrow" /></a>
+          </div>
+          <div class="buffet__photos reveal">
+            <figure class="buffet__photo buffet__photo--one"><Image src={food1} alt="色とりどりの野菜が入ったフィリピン料理の一例" width={480} format="webp" loading="lazy" /></figure>
+            <figure class="buffet__photo buffet__photo--two"><Image src={food2} alt="野菜や肉を煮込んだ日替わりフィリピン料理の一例" width={480} format="webp" loading="lazy" /></figure>
+            <figure class="buffet__photo buffet__photo--three"><Image src={food3} alt="取り分けて楽しむ日替わり料理の一例" width={480} format="webp" loading="lazy" /></figure>
+            <div class="buffet__seal" aria-hidden="true"><Icon name="sun" /><span>おいしい週末、<br />いただきます。</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="food section wrap" id="menu" aria-labelledby="food-title">
+        <div class="section-heading reveal"><div><p class="eyebrow">FOOD MENU</p><h2 id="food-title">食べて、しゃべって、<br />もうひと皿。</h2></div><p>フィリピンの味も、いつもの味も。<br />お酒に合わせて、気分に合わせて。</p></div>
+        <div class="filipino-menu reveal">
+          <div class="filipino-menu__photos"><Image src={food4} alt="日替わりフィリピン料理の盛り付けの一例" width={480} format="webp" loading="lazy" /><Image src={food5} alt="肉と野菜を使った日替わりフィリピン料理の一例" width={480} format="webp" loading="lazy" /><span>PHILIPPINE<br />STREET FOOD</span></div>
+          <div class="filipino-menu__copy"><span class="label">まずは、フィリピンの味から。</span><h3>フィリピン屋台料理</h3><div class="filipino-menu__item"><h4>フィリピン串焼き</h4><p>ビーフ ／ ポーク ／ チキン ／ シーフード</p></div><div class="filipino-menu__item"><h4>日替わりのフィリピン料理</h4><p>その日の料理は、スタッフにお尋ねください。</p></div><p class="small-note">単品の内容・価格はスタッフへお問い合わせください。<br />写真は日替わり料理の一例です。</p></div>
+        </div>
+        <div class="food__list reveal">
+          <div class="menu-intro"><span>AND, IZAKAYA FOOD.</span><h3>おなじみのひと皿も。</h3><p>焼き鳥におつまみ、鉄板焼き。<br />気軽な一杯のおともにどうぞ。</p></div>
+          <div class="menu-accordions">
+            {foodGroups.map((group, index) => (
+              <details class="menu-group" open={index === 0}>
+                <summary><span><small>{group.en}</small>{group.title}</span><Icon name="plus" /></summary>
+                <dl class="price-list">{group.items.map((item) => <div><dt>{item.name}{item.note && <small>{item.note}</small>}</dt><dd>{item.price}<span>円</span></dd></div>)}</dl>
+              </details>
+            ))}
+            <p class="small-note menu-price-note">料理の表示価格・ご提供内容の詳細は、店舗へお問い合わせください。</p>
+          </div>
+        </div>
+        <div class="pdf-links"><a class="text-link" href={foodPdf} target="_blank" rel="noopener noreferrer">お料理メニューPDFを見る<Icon name="external" /><span class="sr-only">（新しいタブで開きます）</span></a></div>
+      </section>
+
+      <section class="happy" aria-label="ハッピーアワーとハッピーデイ">
+        <div class="wrap happy__inner">
+          <div class="happy__item reveal"><Icon name="glass" /><div><p class="eyebrow">HAPPY HOUR</p><h2>毎日<span>19:00</span>まで、<br class="mobile-only" />ハッピーアワー。</h2><p>土日はお昼から楽しめます。</p></div></div>
+          <div class="happy__item reveal"><Icon name="sun" /><div><p class="eyebrow">HAPPY MONDAY</p><h2><span>月曜日</span>は<br class="mobile-only" />ハッピーデイ！</h2><p>対象メニュー・価格は店舗でご案内します。</p></div></div>
+        </div>
+      </section>
+
+      <section class="drink section" id="drinks" aria-labelledby="drink-title">
+        <div class="wrap drink__inner">
+          <div class="drink__story reveal"><p class="eyebrow">DRINK MENU</p><h2 id="drink-title">おいしい時間に、<br /><span>乾杯。</span></h2><p>生ビールで始める？<br />それとも、ハイボール？<br />お気に入りの一杯を見つけて。</p><figure><Image src={bottles} alt="居酒屋ベンさんのカウンターに並ぶウイスキーや焼酎のボトル" width={382} format="webp" loading="lazy" /><figcaption>今日の一杯は、ベンさんで。</figcaption></figure></div>
+          <div class="drink__menu reveal"><span class="drink__tax">表示価格は税込です</span><dl class="price-list price-list--drink">{drinks.map((item) => <div><dt>{item.name}{item.note && <small>{item.note}</small>}</dt><dd>{item.price}<span>円</span></dd></div>)}</dl><details class="whisky"><summary>ウイスキーもございます<Icon name="plus" /></summary><div><p>{whiskyNames.join(' ／ ')}</p><p class="small-note">取り扱い銘柄・現在の価格は、スタッフへお問い合わせください。</p></div></details><a class="text-link" href={drinkPdf} target="_blank" rel="noopener noreferrer">ドリンクメニューPDFを見る<Icon name="external" /><span class="sr-only">（新しいタブで開きます）</span></a><p class="small-note drink__pdf-note">PDF内のウイスキーにはオープニング価格の記載があります。現在の価格は店舗へお問い合わせください。</p></div>
+        </div>
+      </section>
+
+      <section class="space section wrap" id="space" aria-labelledby="space-title">
+        <div class="section-heading reveal"><div><p class="eyebrow">FIND YOUR FAVORITE SPOT</p><h2 id="space-title">今日は、どこで<br />楽しもう？</h2></div><p>ひとり飲みも、女子会も、家族のごはんも。<br />過ごし方に合わせた席をご用意しています。</p></div>
+        <div class="spaces">{scenes.map((scene) => <article class="space-item reveal"><div class="space-item__image"><Image src={scene.image} alt={scene.alt} width={760} format="webp" loading="lazy" /><span>{scene.number}</span></div><p class="space-item__en">{scene.en}</p><div class="space-item__label"><span>{scene.label}</span><strong>{scene.seats}</strong></div><h3>{scene.title}</h3><p>{scene.text}</p></article>)}</div>
+        <div class="private-party reveal"><div><span>LET’S GET TOGETHER!</span><h3>集まる日も、ベンさんで。</h3><p>宴会や貸切も承ります。ご利用人数やお席、料金など、お気軽にご相談ください。</p></div><a class="button button--navy" href={shop.telephoneHref}>宴会・貸切を相談する<Icon name="arrow" /></a></div>
+      </section>
+
+      <section class="access section" id="access" aria-labelledby="access-title">
+        <div class="wrap">
+          <div class="section-heading reveal"><div><p class="eyebrow">COME ON OVER</p><h2 id="access-title">町田駅から、<br />歩いて<span class="ink-red">2分。</span></h2></div><a class="text-link" href={mapUrl} target="_blank" rel="noopener noreferrer">Googleマップで見る<Icon name="external" /><span class="sr-only">（新しいタブで開きます）</span></a></div>
+          <div class="access__grid">
+            <div class="access__info reveal"><h3>{shop.name}</h3><dl class="shop-info">
+              <div><dt>住所</dt><dd>〒{shop.postalCode}<br />{shop.address}<br />{shop.building}</dd></div>
+              <div><dt>アクセス</dt><dd>{shop.access}<br /><small>{shop.parking}</small></dd></div>
+              <div><dt>営業時間</dt><dd>{shop.hours.map((hour) => <span class="hours-row"><span>{hour.label}</span><strong>{hour.time}</strong></span>)}</dd></div>
+              <div><dt>定休日</dt><dd>{shop.closed}</dd></div>
+              <div><dt>電話</dt><dd><a href={shop.telephoneHref}>{shop.telephone}<Icon name="phone" /></a></dd></div>
+              <div><dt>お支払い</dt><dd>{shop.payment}</dd></div>
+            </dl></div>
+            <div class="access__visual reveal"><figure class="access__exterior"><Image src={exterior} alt="町田市原町田の居酒屋ベンさん外観。フィリピン国旗が目印" width={760} format="webp" loading="lazy" /><figcaption><Icon name="pin" />フィリピン国旗が目印です。</figcaption></figure><div class="access__map"><iframe src={mapEmbedUrl} title="居酒屋ベンさん周辺のGoogleマップ" width="640" height="350" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reservation" id="reservation" aria-labelledby="reservation-title">
+        <div class="wrap reservation__inner"><div class="reveal"><p class="eyebrow">SEE YOU AT BEN-SAN!</p><h2 id="reservation-title">今日は、<br />ベンさんにしよう。</h2><p>お席のご予約、食べ放題、BBQ、貸切のご相談。<br />お気軽にお電話ください。</p></div><div class="reservation__contact reveal"><span>ご予約・お問い合わせ</span><a class="reservation__number" href={shop.telephoneHref}><Icon name="phone" />{shop.telephone}</a><p>平日 17:00–23:00 ／ 土日祝 12:00–23:00<br />水曜定休</p><a class="reservation__map" href={mapUrl} target="_blank" rel="noopener noreferrer"><Icon name="pin" />お店までのルートを調べる<Icon name="external" /><span class="sr-only">（新しいタブで開きます）</span></a></div></div><Icon class="reservation__sun" name="sun" />
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="wrap footer__top"><a class="brand" href="#top"><span class="brand__sun"><Icon name="sun" /></span><span><small>フィリピン屋台料理と、乾杯。</small><span class="brand__name"><span>居酒屋</span>ベンさん<span class="brand__dot">●</span></span></span></a><nav aria-label="フッターナビゲーション">{navigation.map((item) => <a href={item.href}>{item.label}</a>)}</nav><a class="back-top" href="#top" aria-label="ページの先頭に戻る">↑</a></div>
+      <div class="wrap footer__bottom"><span>PHILIPPINE FOOD. JAPANESE IZAKAYA. GOOD TIMES.</span><small>© {new Date().getFullYear()} 居酒屋ベンさん</small></div>
+    </footer>
+    <nav class="mobile-actions" aria-label="電話と地図"><a href={shop.telephoneHref}><Icon name="phone" /><span>電話で予約・問い合わせ<small>{shop.telephone}</small></span></a><a href={mapUrl} target="_blank" rel="noopener noreferrer"><Icon name="pin" /><span>地図を見る<span class="sr-only">（新しいタブで開きます）</span></span></a></nav>
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
 </html>
